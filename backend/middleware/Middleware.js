@@ -1,5 +1,6 @@
-import jwt from 'jsonwebtoken'
-import User from '../models/User.js'
+const jwt = require('jsonwebtoken')
+const User = require('../models/User')
+const { model } = require('mongoose')
 
 
 const middleware =  async (req, res, next) => {
@@ -30,4 +31,4 @@ next()
 }
 
 }
-export default middleware
+model.exports = middleware

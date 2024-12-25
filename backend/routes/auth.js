@@ -1,8 +1,8 @@
-import express from 'express'
-import User from '../models/User.js'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import middleware from '../middleware/Middleware.js'
+const express = require('express');
+const User = require('../models/User.js');
+const bcrypt = require('bcryptjs')
+const jwt  = require('jsonwebtoken')    
+const middleware = require('../middleware/Middleware.js')
 
 const router = express.Router()
 
@@ -60,5 +60,4 @@ return res.status(200).json({success: true , user: req.user})
 });
 
 
-
-export default router;
+module.exports = router;
