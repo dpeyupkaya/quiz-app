@@ -5,13 +5,14 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { FcAbout } from "react-icons/fc";
 import { IoMdHome } from "react-icons/io";
 import { GrContact } from "react-icons/gr";
-import { useAuth } from "../context/ContextProvider";
+import  {useAuth}  from "../context/ContextProvider";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user , logout  } = useAuth();
 
  
 
@@ -22,8 +23,10 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    navigate("/login");
-  };
+    logout();
+   
+    navigate('/login');
+  };;
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -132,10 +135,15 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="flex justify-end space-x-8">
-        <button className="bg-blue-600 px-3 py-2 rounded-lg text-white">
-  Hoşgeldiniz, {user ? user.name : "Ziyaretçi"}
-</button>
-
+  {user ? (
+    <button className="bg-blue-600 px-3 py-2 rounded-lg text-white">
+      Hoşgeldiniz, {user.name}
+    </button>
+  ) : (
+    <button className="bg-gray-400 px-3 py-2 rounded-lg text-white">
+      Yükleniyor...
+    </button>
+  )}
 
   <button
     className="flex items-center bg-red-600 px-4 py-2 rounded-lg hover:bg-red-500 transition-colors duration-300"
@@ -145,6 +153,7 @@ const Navbar = () => {
     Logout
   </button>
 </div>
+
 
       </div>
     </nav>

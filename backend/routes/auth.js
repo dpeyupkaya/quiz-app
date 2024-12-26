@@ -32,32 +32,44 @@ router.post('/register', async (req, res) => {
 });
 
 
+
 router.post('/login', async (req, res) => {
     try {
-        const {  email, password } = req.body; 
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(401).json({ success: false, message: "User not exists" }); 
-        }
-
-        const checkpassword  = await bcrypt.compare(password, user.password)
-
-        if(!checkpassword){
-            return res.status(401).json({ success: false, message: "Wrong Credentials" });
-        }
-
-        const token= jwt.sign({id: user._id}, "secretkeyofnoteapp123@#", {expiresIn:"5h"})
-
-        return res.status(200).json({ success: true, token, user:{name: user.name}, message: "Login successfully" }); 
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ success: false, message: "User does not exist" });
+      }
+  
+      const checkPassword = await bcrypt.compare(password, user.password);
+      if (!checkPassword) {
+        return res.status(401).json({ success: false, message: "Wrong credentials" });
+      }
+  
+      const token = jwt.sign({ id: user._id }, "secretkeyofquizapp123@#", { expiresIn: "5h" });
+      return res.status(200).json({
+        success: true,
+        token,
+        user: { name: user.name },
+        message: "Login successfully"
+      });
     } catch (error) {
-        console.log(error.message);
-        return res.status(500).json({ success: false, message: "Error in login server" });
+      console.log(error.message);
+      return res.status(500).json({ success: false, message: "Error in login server" });
+    }
+
+    
+  });
+  router.get('/verify', middleware, async (req, res) => {
+    try {
+      const userName = req.user.name; 
+      return res.status(200).json({ success: true, user: userName });
+    } catch (error) {
+      return res.status(500).json({ success: false, message: "Error fetching user" });
     }
 });
 
-router.get('/verify', middleware, async (req, res) => {
-return res.status(200).json({success: true , user: req.user})
-});
+
 
 
 module.exports = router;

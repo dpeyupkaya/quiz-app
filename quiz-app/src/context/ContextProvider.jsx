@@ -1,45 +1,61 @@
 import axios from 'axios';
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const authContext = createContext()
+const authContext = createContext();
 
+export const ContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-export const ContextProvider = ({children}) => {
-    const [user , setUser] = useState(null)
-    const login =(user) => {
-        setUser(user)
-    }
-    const logout = () => {
-      localStorage.removeItem('token')
-      setUser(null)
-    }
-    useEffect(() => {
-      const   verifyUser = async () => {
-        try {
-          const res = await axios.get('http://localhost:5000/api/auth/verify',{
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            } 
-          })
-          if(res.data.success){
-            setUser(res.data.user)
-          }
-          else{
-            setUser(null)
-          }
+  const login = (user) => {
+    setUser(user);
+  };
 
-        }catch(error){
-          console.log(error)
-        }
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLoading(false);
+        return;
       }
-      verifyUser()
-    },[])
 
+      try {
+        const res = await axios.get('http://localhost:5000/api/auth/verify', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.data.success) {
+          setUser(res.data.user);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error(error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyUser();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <authContext.Provider value={{user, login, logout}}>
-
-        {children}</authContext.Provider>
+    <authContext.Provider value={{ user, login, logout }}>
+      {children}
+    </authContext.Provider>
   );
 };
-export const useAuth = () => useContext(authContext)
+
+export const useAuth = () => useContext(authContext);
