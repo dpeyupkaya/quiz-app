@@ -5,37 +5,33 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { FcAbout } from "react-icons/fc";
 import { IoMdHome } from "react-icons/io";
 import { GrContact } from "react-icons/gr";
-import  {useAuth}  from "../context/ContextProvider";
-
+import { useAuth } from "../context/ContextProvider";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { user , logout  } = useAuth();
-
- 
-
-
+  const { user, logout } = useAuth();
 
   const handleNavigation = (subject) => {
     navigate(`/${subject.toLowerCase()}`);
   };
 
   const handleLogout = () => {
+    setIsLogoutModalOpen(false);
     logout();
-   
-    navigate('/login');
-  };;
+    navigate("/login");
+  };
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        setShowNavbar(false); 
+        setShowNavbar(false);
       } else {
-        setShowNavbar(true); 
+        setShowNavbar(true);
       }
 
       lastScrollY = window.scrollY;
@@ -49,114 +45,139 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className={`bg-gray-800 text-white p-4 transition-all duration-300 ${
-        showNavbar ? "fixed top-0  left-0 right-0" : "transform -translate-y-full"
-      }`}
-    >
-      <div className="container mx-auto flex justify-between items-center">
-        <h1
-          className="text-2xl font-bold cursor-pointer"
-          onClick={() => handleNavigation("")}
-        >
-          Quiz App
-        </h1>
+    <>
+      <nav
+        className={`bg-gray-800 text-white p-4 transition-all duration-300 ${
+          showNavbar ? "fixed top-0 left-0 right-0" : "transform -translate-y-full"
+        }`}
+      >
+        <div className="container mx-auto flex justify-between items-center">
+          <h1
+            className="text-2xl font-bold cursor-pointer"
+            onClick={() => handleNavigation("")}
+          >
+            Quiz App
+          </h1>
 
-        <ul className="flex space-x-8">
-          <li>
+          <ul className="flex space-x-8">
+            <li>
+              <button
+                className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                onClick={() => handleNavigation("")}
+              >
+                <IoMdHome className="text-2xl" />
+              </button>
+            </li>
+            <li className="relative group">
+              <button
+                className="text-lg text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-600 hover:from-red-500 hover:to-purple-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                <FaBook className="text-2xl" />
+              </button>
+              <div
+                className={`absolute left-0 mt-2 w-48 bg-gray-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out ${
+                  isMenuOpen ? "opacity-100" : ""
+                }`}
+              >
+                <ul>
+                  <li>
+                    <button
+                      className="block px-4 py-2 hover:bg-gray-600"
+                      onClick={() => handleNavigation("math")}
+                    >
+                      Math
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="block px-4 py-2 hover:bg-gray-600"
+                      onClick={() => handleNavigation("physical")}
+                    >
+                      Physical
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="block px-4 py-2 hover:bg-gray-600"
+                      onClick={() => handleNavigation("chemical")}
+                    >
+                      Chemical
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="block px-4 py-2 hover:bg-gray-600"
+                      onClick={() => handleNavigation("biology")}
+                    >
+                      Biology
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <button
+                className="text-lg text-white bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 hover:from-pink-400 hover:to-indigo-500 px-6 py-3 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out"
+                onClick={() => handleNavigation("about")}
+              >
+                <FcAbout className="text-2xl" />
+              </button>
+            </li>
+            <li>
+              <button
+                className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                onClick={() => handleNavigation("contact")}
+              >
+                <GrContact className="text-2xl" />
+              </button>
+            </li>
+          </ul>
+          <div className="flex justify-end space-x-8">
+            {user ? (
+              <button className="bg-blue-600 px-3 py-2 rounded-lg text-white">
+                Hoşgeldiniz {user.name}
+              </button>
+            ) : (
+              <button className="bg-gray-400 px-3 py-2 rounded-lg text-white"
+                onClick={() => navigate("/login")} >
+                Giriş Yapınız
+              </button>
+            )}
+
             <button
-              className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-              onClick={() => handleNavigation("")}
+              className="flex items-center bg-red-600 px-4 py-2 rounded-lg hover:bg-red-500 transition-colors duration-300"
+              onClick={() => setIsLogoutModalOpen(true)}
             >
-              <IoMdHome className="text-2xl" />
+              <AiOutlineLogout className="text-xl mr-2" />
+              Logout
             </button>
-          </li>
-          <li className="relative group">
-            <button
-              className="text-lg text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-600 hover:from-red-500 hover:to-purple-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <FaBook className="text-2xl" />
-            </button>
-            <div
-              className={`absolute left-0 mt-2 w-48 bg-gray-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out ${isMenuOpen ? "opacity-100" : ""}`}
-            >
-              <ul>
-                <li>
-                  <button
-                    className="block px-4 py-2 hover:bg-gray-600"
-                    onClick={() => handleNavigation("math")}
-                  >
-                    Math
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="block px-4 py-2 hover:bg-gray-600"
-                    onClick={() => handleNavigation("physical")}
-                  >
-                    Physical
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="block px-4 py-2 hover:bg-gray-600"
-                    onClick={() => handleNavigation("chemical")}
-                  >
-                    Chemical
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="block px-4 py-2 hover:bg-gray-600"
-                    onClick={() => handleNavigation("biology")}
-                  >
-                    Biology
-                  </button>
-                </li>
-              </ul>
+          </div>
+        </div>
+      </nav>
+
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-semibold mb-4">Çıkış yapmak istediğinizden emin misiniz?</h2>
+            <div className="flex justify-center space-x-4">
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
+                onClick={ () => navigate("/login") }
+              >
+                Evet
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
+                onClick={() => setIsLogoutModalOpen(false)}
+              >
+                Hayır
+              </button>
             </div>
-          </li>
-          <li>
-            <button
-              className="text-lg text-white bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 hover:from-pink-400 hover:to-indigo-500 px-6 py-3 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out"
-              onClick={() => handleNavigation("about")}
-            >
-              <FcAbout className="text-2xl" />
-            </button>
-          </li>
-          <li>
-            <button
-              className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-              onClick={() => handleNavigation("contact")}
-            >
-              <GrContact className="text-2xl" />
-            </button>
-          </li>
-        </ul>
-        <div className="flex justify-end space-x-8">
-  {user ? (
-    <button className="bg-blue-600 px-3 py-2 rounded-lg text-white">
-      Hoşgeldiniz, {user.name}
-    </button>
-  ) : (
-    <button className="bg-gray-400 px-3 py-2 rounded-lg text-white">
-      Yükleniyor...
-    </button>
-  )}
-
-  <button
-    className="flex items-center bg-red-600 px-4 py-2 rounded-lg hover:bg-red-500 transition-colors duration-300"
-    onClick={handleLogout}
-  >
-    <AiOutlineLogout className="text-xl mr-2" />
-    Logout
-  </button>
-</div>
-
-
-      </div>
-    </nav>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
