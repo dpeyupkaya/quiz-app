@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  
+    .animated-bg {
+      background: linear-gradient(-45deg, #1e293b, #d1fae5, #1e293b, #94a3b8);
+      background-size: 400% 400%;
+      animation: gradientBackground 10s ease infinite;
+    }
+  }
+  @layer utilities {
+    @keyframes signupGradient {
+        0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      
+        .animated-signup-bg {
+          background: linear-gradient(-45deg, #1e293b, #d1fae5, #1e293b, #94a3b8);
+          background-size: 400% 400%;
+          animation: gradientBackground 10s ease infinite;
+        }
+      }
+    /* index.css */
+
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-50px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.5s ease-out;
+}

@@ -19,41 +19,26 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     setIsLogoutModalOpen(false);
     logout();
-    navigate("/login");
+    navigate("/");
   };
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
+ 
 
-    const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-
-      lastScrollY = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+   
 
   return (
     <>
-      <nav
-        className={`bg-gray-800 text-white p-4 transition-all duration-300 ${
-          showNavbar ? "fixed top-0 left-0 right-0" : "transform -translate-y-full"
-        }`}
-      >
+<nav
+  className={`bg-gradient-to-r from-indigo-500 via-pink-600 to-teal-500 text-white p-4 shadow-lg transition-transform duration-500 ease-bounce ${
+    showNavbar ? "top-0 left-0 right-0 z-50 transform scale-100" : "transform -translate-y-full"
+  } fixed w-full`}
+>
         <div className="container mx-auto flex justify-between items-center">
           <h1
-            className="text-2xl font-bold cursor-pointer"
+            className="text-3xl font-bold cursor-pointer tracking-wider hover:text-gray-100 transition duration-300"
             onClick={() => handleNavigation("")}
           >
             Quiz App
@@ -62,7 +47,7 @@ const Navbar = () => {
           <ul className="flex space-x-8">
             <li>
               <button
-                className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                className="text-lg px-6 py-3 rounded-full hover:bg-teal-600 transition duration-300"
                 onClick={() => handleNavigation("")}
               >
                 <IoMdHome className="text-2xl" />
@@ -70,20 +55,20 @@ const Navbar = () => {
             </li>
             <li className="relative group">
               <button
-                className="text-lg text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-600 hover:from-red-500 hover:to-purple-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                className="text-lg px-6 py-3 rounded-full hover:bg-teal-600 transition duration-300"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 <FaBook className="text-2xl" />
               </button>
               <div
-                className={`absolute left-0 mt-2 w-48 bg-gray-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out ${
+                className={`absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                   isMenuOpen ? "opacity-100" : ""
                 }`}
               >
                 <ul>
                   <li>
                     <button
-                      className="block px-4 py-2 hover:bg-gray-600"
+                      className="block px-4 py-2 hover:bg-teal-100"
                       onClick={() => handleNavigation("math")}
                     >
                       Math
@@ -91,7 +76,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <button
-                      className="block px-4 py-2 hover:bg-gray-600"
+                      className="block px-4 py-2 hover:bg-teal-100"
                       onClick={() => handleNavigation("physical")}
                     >
                       Physical
@@ -99,7 +84,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <button
-                      className="block px-4 py-2 hover:bg-gray-600"
+                      className="block px-4 py-2 hover:bg-teal-100"
                       onClick={() => handleNavigation("chemical")}
                     >
                       Chemical
@@ -107,7 +92,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <button
-                      className="block px-4 py-2 hover:bg-gray-600"
+                      className="block px-4 py-2 hover:bg-teal-100"
                       onClick={() => handleNavigation("biology")}
                     >
                       Biology
@@ -118,7 +103,7 @@ const Navbar = () => {
             </li>
             <li>
               <button
-                className="text-lg text-white bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 hover:from-pink-400 hover:to-indigo-500 px-6 py-3 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out"
+                className="text-lg px-6 py-3 rounded-full hover:bg-teal-600 transition duration-300"
                 onClick={() => handleNavigation("about")}
               >
                 <FcAbout className="text-2xl" />
@@ -126,22 +111,25 @@ const Navbar = () => {
             </li>
             <li>
               <button
-                className="text-lg text-white bg-gradient-to-r from-teal-400 via-green-500 to-blue-600 hover:from-blue-500 hover:to-teal-400 px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                className="text-lg px-6 py-3 rounded-full hover:bg-teal-600 transition duration-300"
                 onClick={() => handleNavigation("contact")}
               >
                 <GrContact className="text-2xl" />
               </button>
             </li>
           </ul>
+
           <div className="flex justify-end space-x-8">
             {user ? (
-              <button className="bg-blue-600 px-3 py-2 rounded-lg text-white">
-                Hoşgeldiniz {user.name}
+              <button className="bg-teal-600 px-3 py-2 rounded-lg text-white hover:bg-teal-500 transition duration-300">
+                Welcome, {user.name}
               </button>
             ) : (
-              <button className="bg-gray-400 px-3 py-2 rounded-lg text-white"
-                onClick={() => navigate("/login")} >
-                Giriş Yapınız
+              <button
+                className="bg-gray-400 px-3 py-2 rounded-lg text-white hover:bg-gray-300 transition duration-300"
+                onClick={() => navigate("/login")}
+              >
+                Login
               </button>
             )}
 
@@ -159,19 +147,19 @@ const Navbar = () => {
       {isLogoutModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-lg font-semibold mb-4">Çıkış yapmak istediğinizden emin misiniz?</h2>
+            <h2 className="text-lg font-semibold mb-4">Are you sure?</h2>
             <div className="flex justify-center space-x-4">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
-                onClick={ () => navigate("/login") }
+                onClick={handleLogout}
               >
-                Evet
+                Yes
               </button>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
                 onClick={() => setIsLogoutModalOpen(false)}
               >
-                Hayır
+                No
               </button>
             </div>
           </div>

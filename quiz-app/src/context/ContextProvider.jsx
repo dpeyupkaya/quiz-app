@@ -19,6 +19,7 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     const verifyUser = async () => {
       const token = localStorage.getItem('token');
+      console.log('Token:', token);
       if (!token) {
         setLoading(false);
         return;
@@ -30,6 +31,7 @@ export const ContextProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log('API Yanıtı:', res.data);
 
         if (res.data.success) {
           setUser(res.data.user);
@@ -37,7 +39,7 @@ export const ContextProvider = ({ children }) => {
           setUser(null);
         }
       } catch (error) {
-        console.error(error);
+        console.error('API Hatası:', error);
         setUser(null);
       } finally {
         setLoading(false);

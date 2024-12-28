@@ -1,9 +1,22 @@
 import React from "react";
+import video from "../videos/contact.mp4"; 
 
 const Contact = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 text-white">
-      <div className="text-center p-8 max-w-3xl bg-white text-blue-500 rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center relative">
+     
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-50"
+        autoPlay
+        loop
+        muted
+      >
+        <source src={video} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+  
+      <div className="text-center p-8 max-w-3xl text-white relative z-10">
         <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
         <p className="text-lg mb-4">
           If you have any questions or inquiries, feel free to reach out to us!
