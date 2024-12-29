@@ -22,7 +22,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setIsLogoutModalOpen(false);
     logout();
-    navigate("/");
+    navigate("/login");
   };
 
  
@@ -135,7 +135,7 @@ const Navbar = () => {
 
             <button
               className="flex items-center bg-red-600 px-4 py-2 rounded-lg hover:bg-red-500 transition-colors duration-300"
-              onClick={() => setIsLogoutModalOpen(true)}
+              onClick={() => handleLogout()}
             >
               <AiOutlineLogout className="text-xl mr-2" />
               Logout
@@ -144,27 +144,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {isLogoutModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-lg font-semibold mb-4">Are you sure?</h2>
-            <div className="flex justify-center space-x-4">
-              <button
-                className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
-                onClick={handleLogout}
-              >
-                Yes
-              </button>
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
-                onClick={() => setIsLogoutModalOpen(false)}
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    
     </>
   );
 };

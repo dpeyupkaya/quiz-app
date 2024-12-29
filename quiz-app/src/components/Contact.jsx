@@ -4,9 +4,8 @@ import video from "../videos/contact.mp4";
 const Contact = () => {
   return (
     <div className="min-h-screen flex items-center justify-center relative">
-     
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-50"
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-100"
         autoPlay
         loop
         muted
@@ -15,26 +14,28 @@ const Contact = () => {
         Your browser does not support the video tag.
       </video>
 
-  
-      <div className="text-center p-8 max-w-3xl text-white relative z-10">
-        <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
-        <p className="text-lg mb-4">
-          If you have any questions or inquiries, feel free to reach out to us!
-        </p>
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Reach Us at:</h2>
-          <p className="text-lg">
-            Email: <a href="mailto:support@quizapp.com" className="underline">support@quizapp.com</a>
+      <div className="text-center p-8 max-w-3xl text-black relative z-10">
+       
+        <div className=" bg-opacity-60 p-8 rounded-lg shadow-lg backdrop-blur-md">
+          <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
+          <p className="text-lg mb-4">
+            If you have any questions or inquiries, feel free to reach out to us!
           </p>
-          <p className="text-lg">Phone: +1 234 567 890</p>
-        </div>
-        <div className="flex justify-center">
-          <a
-            href="mailto:support@quizapp.com"
-            className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-400 transition duration-300"
-          >
-            Send an Email
-          </a>
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold mb-4">Reach Us at:</h2>
+            <p className="text-lg">
+              Email: <a href="mailto:support@quizapp.com" className="underline">support@quizapp.com</a>
+            </p>
+            <p className="text-lg">Phone: +1 234 567 890</p>
+          </div>
+          <div className="flex justify-center">
+            <a
+              href="mailto:support@quizapp.com"
+              className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-400 transition duration-300 transform hover:scale-105 hover:shadow-lg"
+            >
+              Send an Email
+            </a>
+          </div>
         </div>
       </div>
     </div>

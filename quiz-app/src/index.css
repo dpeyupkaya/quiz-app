@@ -40,7 +40,7 @@
           animation: gradientBackground 10s ease infinite;
         }
       }
-    /* index.css */
+  
 
 @keyframes bounceIn {
   0% {
@@ -54,6 +54,21 @@
   }
 }
 
-.animate-bounceIn {
-  animation: bounceIn 0.5s ease-out;
+@keyframes prisma {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
+
+.animate-prisma {
+  animation: prisma 8s infinite linear;
+}
+
+
+
