@@ -66,9 +66,23 @@
   }
 }
 
-.animate-prisma {
-  animation: prisma 8s infinite linear;
+/* Prizma animasyonu */
+@keyframes prisma {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
+.animate-prisma {
+  background: linear-gradient(45deg, #000000, #dc2626, #6b7280, #cf0101);
+  background-size: 300% 300%;
+  animation: prisma 8s infinite linear;
+}
 
 

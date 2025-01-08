@@ -6,15 +6,15 @@ export default function Footer() {
   return (
     <>
       <Policy />
-      <footer className="bg-gradient-to-r from-red-600 via-orange-600 to-yellow-500 text-white py-4 mt-16">
+      <footer className="bg-gradient-to-r from-blue-600 via-black to-red-600 text-white py-10 backdrop-blur-sm animate-prisma">
         <div className="container mx-auto text-center">
-          {/* Sosyal Medya Bağlantıları */}
-          <div className="flex justify-center space-x-4 mb-6">
+      
+          <div className="flex justify-center space-x-10 mb-4">
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:text-blue-600 transition duration-300"
+              className="text-6xl hover:text-blue-400 transition duration-300"
             >
               <FaFacebook />
             </a>
@@ -22,7 +22,7 @@ export default function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:text-blue-400 transition duration-300"
+              className="text-6xl hover:text-blue-300 transition duration-300"
             >
               <FaTwitter />
             </a>
@@ -30,7 +30,7 @@ export default function Footer() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:text-pink-600 transition duration-300"
+              className="text-6xl hover:text-pink-400 transition duration-300"
             >
               <FaInstagram />
             </a>
@@ -38,19 +38,20 @@ export default function Footer() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:text-blue-700 transition duration-300"
+              className="text-6xl hover:text-blue-500 transition duration-300"
             >
               <FaLinkedin />
             </a>
           </div>
 
-        
+          {/* Telif Hakkı Metni */}
           <p className="text-lg font-medium">
             © 2024 Quiz App. All Rights Reserved.
           </p>
         </div>
-   
-        <div className="border-t-2 border-white mt-8"></div>
+
+        {/* Çizgi */}
+        <div className="border-t-2 border-white/50 mt-8"></div>
       </footer>
     </>
   );
