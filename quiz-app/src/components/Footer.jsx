@@ -1,6 +1,6 @@
 import React from "react";
 import Policy from "./Policy";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaBook, FaGraduationCap, FaLightbulb, FaUserGraduate } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -8,50 +8,55 @@ export default function Footer() {
       <Policy />
       <footer className="bg-gradient-to-r from-blue-600 via-black to-red-600 text-white py-10 backdrop-blur-sm animate-prisma">
         <div className="container mx-auto text-center">
-      
-          <div className="flex justify-center space-x-10 mb-4">
+       
+          <div className="flex justify-center space-x-10 mb-6">
             <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-6xl hover:text-blue-400 transition duration-300"
+              href="/study-materials"
+              className="text-5xl hover:text-blue-400 transition duration-300"
+              title="Study Materials"
             >
-              <FaFacebook />
+              <FaBook />
             </a>
             <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-6xl hover:text-blue-300 transition duration-300"
+              href="/courses"
+              className="text-5xl hover:text-purple-400 transition duration-300"
+              title="Courses"
             >
-              <FaTwitter />
+              <FaGraduationCap />
             </a>
             <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-6xl hover:text-pink-400 transition duration-300"
+              href="/tips"
+              className="text-5xl hover:text-yellow-400 transition duration-300"
+              title="Study Tips"
             >
-              <FaInstagram />
+              <FaLightbulb />
             </a>
             <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-6xl hover:text-blue-500 transition duration-300"
+              href="/community"
+              className="text-5xl hover:text-green-400 transition duration-300"
+              title="Community"
             >
-              <FaLinkedin />
+              <FaUserGraduate />
             </a>
           </div>
 
-          {/* Telif Hakkı Metni */}
-          <p className="text-lg font-medium">
-            © 2024 Quiz App. All Rights Reserved.
-          </p>
-        </div>
+        
+          <div className="space-y-2">
+            <p className="text-lg font-medium">
+              Enhance your learning experience with Quiz App.
+            </p>
+            <p className="text-sm text-white/80">
+              Explore study materials, courses, and tips to ace your exams.
+            </p>
+          </div>
 
-        {/* Çizgi */}
-        <div className="border-t-2 border-white/50 mt-8"></div>
+         
+          <div className="border-t-2 border-white/50 mt-8 pt-6">
+            <p className="text-sm text-white/70">
+              © 2024 Quiz App. All Rights Reserved.
+            </p>
+          </div>
+        </div>
       </footer>
     </>
   );
